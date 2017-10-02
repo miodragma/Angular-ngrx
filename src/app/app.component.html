@@ -1,0 +1,5 @@
+<app-web-header *ngIf="(previewState | async).isPreview"></app-web-header>
+<app-admin-header *ngIf="!(previewState | async).isPreview"></app-admin-header>
+<div class="container-fluid">
+<router-outlet></router-outlet>
+</div>

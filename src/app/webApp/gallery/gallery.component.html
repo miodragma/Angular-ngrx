@@ -1,0 +1,21 @@
+
+<br>
+<div class="container" *ngIf="(uploadState | async).images.length === 0">
+  <div class="row">
+    <p>
+      Gallery ( No images )
+    </p>
+  </div>
+</div>
+
+<div class="galleryBorder" *ngIf="!((uploadState | async).images.length === 0)">
+  <section id="photos">
+    <div *ngFor="let image of (uploadState | async).images">
+      <img [src]="image.imagePath">
+    </div>
+  </section>
+</div>
+
+
+
+

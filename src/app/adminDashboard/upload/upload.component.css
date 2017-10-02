@@ -1,0 +1,29 @@
+.example-card {
+  max-width: 300px;
+  height: auto;
+}
+
+md-card img {
+  max-width: 300px;
+  max-height: 300px;
+  display: inline-block;
+  background: center center no-repeat;
+  background-size: contain;
+  position: relative;
+}
+
+.skipped {
+  display: block;
+  margin: auto;
+  max-width: 86px;
+  max-height: 86px;
+  vertical-align: middle;
+}
+
+.skippedDiv {
+  border-right: 1px solid #333333;
+  display: inline-block;
+  width: 110px;
+  height: 110px;
+  margin: 0 10px 0 0;
+}

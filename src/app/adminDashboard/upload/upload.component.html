@@ -1,0 +1,94 @@
+<image-upload
+  #file
+  (click)="onResetCounter()"
+  (uploadFinished)="onUploadFinished($event)"
+  (removed)="imageRemoved($event)">
+</image-upload>
+
+<br>
+
+<button md-raised-button
+        color="primary"
+        type="button"
+        (click)="onLoadImages(isDisabledImages)"
+        [disabled]="(uploadState | async).images.length === 0">
+  {{ (isDisabledImages || (uploadState | async).images.length === 0) ? 'Load Images' : 'Hide Images' }}
+</button>
+
+<button
+  md-raised-button
+  color="primary"
+  type="button"
+  (click)="onStoreFiles()"
+  [disabled]="!disabledMode">
+  Upload Photos
+</button>
+
+<br>
+
+<div *ngIf="!isDisabledImages">
+
+  <div style="margin: 10px 0" class="row" *ngFor="let image of (uploadState | async).images; let i = index">
+    <div class="col-xs-offset-3 col-xs-9">
+      <div class="box">
+        <md-card class="example-card">
+          <md-card-header>
+            <md-card-subtitle>{{ image.name }}</md-card-subtitle>
+          </md-card-header>
+          <img [src]="image.imagePath">
+          <md-card-actions>
+            <button color="warn" md-button (click)="onClickDelete(image, i)">DELETE</button>
+          </md-card-actions>
+        </md-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isDisabledSpinner">
+  <md-spinner style="max-width: 50px"></md-spinner>
+</div>
+
+<div *ngIf="!isDisableBar">
+  <h4>Process Info:</h4>
+  <p>File: {{ imageName }}</p>
+  <div style="display: inline-block">
+    <img class="skipped" [src]="exportedImage">
+  </div>
+  <md-progress-bar
+    class="example-section"
+    color="primary"
+    mode="buffer"
+    [value]="value"
+    [bufferValue]="bufferValue"
+    style="max-width: 500px">
+  </md-progress-bar>
+  <p>
+    Process: {{ percent }} %
+  </p>
+  <p>
+    Time elapsed: {{ totalImagesTime }}
+  </p>
+  <p>
+    Uploaded image: {{ uploaded }} / {{ forUpload }}
+  </p>
+  <div>
+    <h4>Stored image Info:</h4>
+    <p>File: {{ exportedImageName }}</p>
+    <div style="display: inline-block">
+      <img class="skipped" [src]="convertedImage">
+    </div>
+    <p>Before convert image size: {{ imageSizeInfo }} MB</p>
+    <p>Converted image size: {{ exportedImageSize }} kB </p>
+    <p>Time elapsed: {{ totalImageTime }}</p>
+  </div>
+  <div *ngIf="!isDisabledSkippedImage">
+    <h4 *ngIf="!(skippedImages.length === 0)">
+      Skiped {{ skippedImages.length === 1 ? 'image' : 'images' }}: (these images are already uploaded!)
+    </h4>
+    <div style="display: inline-block; margin-right: 16px; margin-top: 5px" *ngFor="let skippedImage of skippedImages">
+      <span style="text-align: center; margin-bottom: 0">{{ skippedImage.name }}</span>
+      <img class="skipped" [src]="skippedImage.src">
+    </div>
+  </div>
+</div>

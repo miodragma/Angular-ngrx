@@ -1,0 +1,8 @@
+<md-toolbar color="primary" class="fixed-header">
+  <button (click)="onToggle()" md-icon-button="menu"><md-icon svgIcon="menu"></md-icon></button>
+  <button md-button routerLink="/" (click)="onClickPreview()">Preview site</button>
+  <div class="authButtons">
+    <button *ngIf="!(authState | async).authenticated" md-button routerLink="/signin">Login</button>
+    <button *ngIf="(authState | async).authenticated "md-button (click)="onLogout()">Logout</button>
+  </div>
+</md-toolbar>

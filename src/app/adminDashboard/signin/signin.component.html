@@ -1,0 +1,37 @@
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-offset-4 col-xs-9">
+      <div class="box">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-form">
+          <md-input-container class="example-full-width">
+            <input
+              mdInput
+              placeholder="email"
+              type="email"
+              name="email"
+              required
+              email
+              ngModel
+              #email="ngModel"
+            >
+          </md-input-container>
+          <md-input-container class="example-full-width">
+            <input
+              mdInput
+              placeholder="password"
+              type="password"
+              name="password"
+              required
+              ngModel
+              #password="ngModel"
+              minlength="6"
+            >
+          </md-input-container>
+          <button md-button color="primary" type="submit">Submit</button>
+        </form>
+        <p *ngIf="(authError | async).authErrorMessage !== ''" style="color: red;">error: {{ (authError | async).authErrorMessage }}</p>
+      </div>
+    </div>
+  </div>
+</div>

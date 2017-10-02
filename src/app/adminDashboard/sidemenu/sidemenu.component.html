@@ -1,0 +1,23 @@
+<div id="mySidenav" class="sidenav" #sidemenuRef>
+  <div style="width: 50%; margin: auto">
+    <button md-button (click)="onOpenGallery('gallery')">Gallery</button>
+    <ul *ngIf="isOpened === 'gallery'">
+      <li><a style="cursor: pointer" [routerLink]="['upload']">Gallery 1</a></li>
+    </ul>
+    <button md-button (click)="onOpenGallery('services')">Services</button>
+    <ul *ngIf="isOpened === 'services'">
+      <li>Services</li>
+    </ul>
+    <button md-button (click)="onOpenGallery('clients')">Clients</button>
+    <ul *ngIf="isOpened === 'clients'">
+      <li>Clients</li>
+    </ul>
+    <button md-button (click)="onOpenGallery('contact')">Contact</button>
+    <ul *ngIf="isOpened === 'contact'">
+      <li>Contact</li>
+    </ul>
+  </div>
+</div>
+<div id="main" #main>
+  <router-outlet></router-outlet>
+</div>

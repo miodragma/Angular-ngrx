@@ -1,0 +1,10 @@
+<md-toolbar color="primary">
+  <button md-button routerLink="/">Home</button>
+  <button md-button routerLink="gallery">Gallery</button>
+  <button md-button routerLink="about">About us</button>
+  <button md-button routerLink="contact">Contact</button>
+  <div class="authButtons">
+    <button *ngIf="(authState | async).authenticated" md-button routerLink="/adminDashboard" (click)="onAdminDashboard()">Admin Dashboard</button>
+    <button *ngIf="!(authState | async).authenticated" md-button routerLink="/signin">Login</button>
+  </div>
+</md-toolbar>
