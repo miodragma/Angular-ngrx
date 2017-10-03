@@ -16,7 +16,7 @@ import * as AuthActions from '../signin/store/auth.actions';
 })
 export class HeaderComponent implements OnInit {
 
-  authState: Observable<fromAuth.State>
+  authState: Observable<fromAuth.State>;
 
   constructor(
     private iconRegistry: MdIconRegistry,

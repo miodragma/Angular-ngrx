@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Ng2ImgMaxService } from 'ng2-img-max';
 import { MdSnackBar } from '@angular/material';
 import 'rxjs/add/operator/take';
-import 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -11,6 +10,7 @@ import { InfoImage } from '../model/infoImage.model';
 import * as fromApp from '../../store/app.reducers';
 import * as fromUpload from './store/upload.reducers';
 import * as UploadActions from './store/upload.actions'
+import * as SidemenuActions from '../sidemenu/store/sidemenu.actions';
 
 @Component({
   selector: 'app-upload',
@@ -63,6 +63,7 @@ export class UploadComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.store.dispatch(new SidemenuActions.Toggle('0'));
     this.store.dispatch(new UploadActions.LoadImages());
     this.uploadState = this.store.select('upload');
   }
