@@ -63,7 +63,7 @@ export class UploadComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.store.dispatch(new SidemenuActions.Toggle('0'));
+    setTimeout(() => this.store.dispatch(new SidemenuActions.Toggle('0')), 2000);
     this.store.dispatch(new UploadActions.LoadImages());
     this.uploadState = this.store.select('upload');
   }
@@ -75,14 +75,15 @@ export class UploadComponent implements OnInit {
       setTimeout(() => {
         setTimeout(() => {this.disabledMode = true; this.isDisabledSpinner = true}, 2500);
         this.snackBar(`Succeeded! ${this.storedFileBeforeUpload.length > 1 ? 'Images' : 'Image'} was uploaded.`);
+        this.counter = 0;
       }, 10000);
       this.counter = 1
     }
   }
 
   onUploadFinished(event) {
-    this.isDisabledImages = true;
     this.disabledMode = false;
+    this.isDisabledImages = true;
     const file: File = event.file;
     this.store.select('upload')
       .take(1)
@@ -159,6 +160,7 @@ export class UploadComponent implements OnInit {
       this.totalImagesTime = this.timeElapsed(this.calculateImagesSeconds);
       this.store.dispatch(new UploadActions.LoadImages());
       this.isDisabledSkippedImage = false;
+      this.clearValues();
       console.log('DONE')
     }
   }
@@ -218,14 +220,7 @@ export class UploadComponent implements OnInit {
   }
 
   onResetCounter() {
-    this.clearValues();
-    this.storedFileBeforeUpload = [];
-  }
-
-  clearValues() {
-    this.skippedImages = [];
-    this.uploadImages = [];
-    this.imagesLength = -1;
+    this.imagesLength = 0;
     this.value = 0;
     this.bufferValue = 0;
     this.uploaded = 0;
@@ -242,6 +237,12 @@ export class UploadComponent implements OnInit {
     this.totalImageTime = '';
     this.totalImagesTime = '';
     this.isDisableBar = true;
+  }
+
+  clearValues() {
+    this.storedFileBeforeUpload = [];
+    this.skippedImages = [];
+    this.uploadImages = [];
   }
 
 }
