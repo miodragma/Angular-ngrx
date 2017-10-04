@@ -11,7 +11,7 @@
 <div class="galleryBorder" *ngIf="!((uploadState | async).images.length === 0)">
   <section id="photos">
     <div *ngFor="let image of (uploadState | async).images">
-      <img [src]="image.imagePath">
+      <img (click)="onOpenModal(image.imagePath)" [src]="image.imagePath">
     </div>
   </section>
 </div>
